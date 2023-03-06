@@ -1,41 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Roboto:wght@300&display=swap");
+
 body,
 html {
   height: 100%;
   width: 100%;
   margin: 0;
   background-image: url(../img/vecteezy_pink-pastel-sky-for-background-beautiful-romantic-dreamy-clouds_2833561.jpg);
+  font-family: "Lato", sans-serif;
+  color: rgb(42, 42, 42);
 }
 
-.weather-container {
+.flex-center,
+.weather-data p {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+.weather-container {
   padding-top: 8rem;
+}
+
+.weather-data {
+  justify-content: space-between;
+  display: flex;
+  height: 30rem;
+}
+
+.weather-data p {
+  font-size: 1.5rem;
+  margin: 5px;
+}
+
+.data-degrees {
+  font-size: 5.5rem;
+  text-shadow: 7px 7px rgba(255, 255, 255, 0.75);
+}
+
+.data-weather,
+.data-city {
+  font-weight: bold;
 }
 
 input,
 button {
   background-color: rgb(236, 236, 236);
   border: none;
-  box-shadow: 7px 10px 25px 0px rgba(148, 148, 148, 0.75);
-  -webkit-box-shadow: 7px 10px 25px 0px rgba(148, 148, 148, 0.75);
-  -moz-box-shadow: 7px 10px 25px 0px rgba(148, 148, 148, 0.75);
+  box-shadow: 7px 10px 25px 0px rgba(187, 187, 187, 0.75);
+  -webkit-box-shadow: 7px 10px 25px 0px rgba(187, 187, 187, 0.75);
+  -moz-box-shadow: 7px 10px 25px 0px rgba(187, 187, 187, 0.75);
+  font-family: inherit;
 }
 
 input {
-  width: 20rem;
+  width: 22rem;
   height: 2rem;
   border-radius: 0 15px 0 15px;
   margin: 20px;
+  margin-bottom: 100px;
   padding: 10px;
+  font-size: 1.5rem;
 }
 
 input:focus {
   outline: none;
+  background-color: rgb(246, 235, 245);
 }
 
 button {
   height: 2rem;
   border-radius: 15px 0 15px 0;
   width: 100px;
+  font-size: 1rem;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgb(246, 235, 245);
+  transform: translatey(-10%);
 }

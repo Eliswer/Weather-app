@@ -11,11 +11,11 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-##Technologies used:
+## Technologies used:
  - React - basic structure purposes
  - Axios - api calls
  
- ##API calls I made:
+ ## API calls I made:
  - http://api.openweathermap.org/geo/1.0/direct
  - https://api.openweathermap.org/data/2.5/weather
  - https://www.timeapi.io/api/TimeZone/coordinate

@@ -15,7 +15,7 @@ const apiDailyWeather = async (city) => {
   const lon = await latLonResponse.data[0].lon;
 
   const dailyResponse = await axios.get(
-    "https://api.openweathermap.org/data/2.5/forecast",
+    " http://api.openweathermap.org/data/2.5/forecast",
     {
       params: {
         lat,
@@ -27,7 +27,7 @@ const apiDailyWeather = async (city) => {
     }
   );
 
-  console.log(dailyResponse, "daily");
+  console.log(dailyResponse, "dailyyyyyyyyyyyyyyyy");
   return dailyResponse;
 };
 

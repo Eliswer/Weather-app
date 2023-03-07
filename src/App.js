@@ -10,7 +10,7 @@ function App() {
     fetchFirstData();
   }, []);
 
-  const [cityName, setCityName] = useState("");
+  const [cityName, setCityName] = useState("Prague");
   const [showWeather, setShowWeather] = useState({
     degrees: 0,
     place: ["Prague, CZ"],
@@ -30,7 +30,7 @@ function App() {
       clouds: firstResponse.data.weather[0].description,
       unixTimestamp: firstResponse.data.dt,
     });
-    console.log(showWeather);
+    setCityName("");
   };
 
   const getData = async (event) => {
@@ -65,7 +65,11 @@ function App() {
         <button onClick={getData}>Search</button>
       </form>
 
-      <WeatherData showWeather={showWeather} icon={showWeather.icon} />
+      <WeatherData
+        showWeather={showWeather}
+        icon={showWeather.icon}
+        cityName={cityName}
+      />
     </div>
   );
 }

@@ -62,6 +62,10 @@ button {
   font-family: inherit;
 }
 
+img {
+  width: 9.5rem;
+}
+
 input {
   width: 22rem;
   height: 2rem;

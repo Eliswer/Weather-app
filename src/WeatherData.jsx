@@ -21,7 +21,7 @@ function WeatherData({ showWeather, icon, dailyResponse }) {
           </p>
           <p className="data-weather">{showWeather.clouds}</p>
         </div>
-        <img src={`./img/icons/${icon}@2x.png`} alt="icon"></img>
+        <img src={`Weather-app/src/img/icons/${icon}@2x.png`} alt="icon"></img>
         <h1 className="data-degrees">{showWeather.degrees}°C</h1>
       </div>
 

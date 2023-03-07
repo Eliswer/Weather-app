@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import "./css/App.css";
-import citySearch from "./apiCurrentWeather";
 import WeatherData from "./WeatherData";
-import dailyWeather from "./apiDailyWeather";
+
+/*Api calls*/
+import citySearch from "./apiCurrentWeather";
 
 function App() {
   useEffect(() => {
@@ -10,7 +11,6 @@ function App() {
   }, []);
 
   const [cityName, setCityName] = useState("");
-  const [dailyResponse, setDailyResponse] = useState();
   const [showWeather, setShowWeather] = useState({
     degrees: 0,
     place: ["Prague, CZ"],
@@ -30,13 +30,13 @@ function App() {
       clouds: firstResponse.data.weather[0].description,
       unixTimestamp: firstResponse.data.dt,
     });
+    console.log(showWeather);
   };
 
   const getData = async (event) => {
     event.preventDefault();
 
     const response = await citySearch(cityName);
-    setDailyResponse(await dailyWeather(cityName));
 
     setShowWeather({
       ...showWeather,
@@ -65,11 +65,7 @@ function App() {
         <button onClick={getData}>Search</button>
       </form>
 
-      <WeatherData
-        showWeather={showWeather}
-        dailyResponse={dailyResponse}
-        icon={showWeather.icon}
-      />
+      <WeatherData showWeather={showWeather} icon={showWeather.icon} />
     </div>
   );
 }

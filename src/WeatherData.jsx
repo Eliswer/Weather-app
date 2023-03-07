@@ -1,7 +1,8 @@
 import React from "react";
 import DailyWeather from "./DailyWeather";
+import apiDailyWeather from "./apiDailyWeather";
 
-function WeatherData({ showWeather, icon, dailyResponse }) {
+function WeatherData({ showWeather, icon }) {
   const yearlyTime = new Date(
     showWeather.unixTimestamp * 1000
   ).toLocaleDateString("en-GB");
@@ -26,13 +27,13 @@ function WeatherData({ showWeather, icon, dailyResponse }) {
       </div>
 
       <div className="weather-data-next">
-        <DailyWeather degrees={10} day={"Mo"} dailyResponse={dailyResponse} />
-        <DailyWeather degrees={10} day={"Tue"} dailyResponse={dailyResponse} />
-        <DailyWeather degrees={10} day={"Wed"} dailyResponse={dailyResponse} />
-        <DailyWeather degrees={10} day={"Thu"} dailyResponse={dailyResponse} />
-        <DailyWeather degrees={10} day={"Fri"} dailyResponse={dailyResponse} />
-        <DailyWeather degrees={10} day={"Sat"} dailyResponse={dailyResponse} />
-        <DailyWeather degrees={10} day={"Sun"} dailyResponse={dailyResponse} />
+        <DailyWeather degrees={10} day={"Mo"} />
+        <DailyWeather degrees={10} day={"Tue"} />
+        <DailyWeather degrees={10} day={"Wed"} />
+        <DailyWeather degrees={10} day={"Thu"} />
+        <DailyWeather degrees={10} day={"Fri"} />
+        <DailyWeather degrees={10} day={"Sat"} />
+        <DailyWeather degrees={10} day={"Sun"} />
       </div>
     </>
   );

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const dailyWeather = async (city) => {
+const apiDailyWeather = async (city) => {
   const latLonResponse = await axios.get(
     "http://api.openweathermap.org/geo/1.0/direct",
     {
@@ -20,14 +20,15 @@ const dailyWeather = async (city) => {
       params: {
         lat,
         lon,
+        cnt: 7,
         units: "metric",
         appid: "f8317eb24fadb65927f631c2ab7ddd46",
       },
     }
   );
 
-  console.log(dailyResponse);
+  console.log(dailyResponse, "daily");
   return dailyResponse;
 };
 
-export default dailyWeather;
+export default apiDailyWeather;

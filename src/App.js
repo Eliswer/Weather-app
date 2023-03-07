@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./css/App.css";
 import WeatherData from "./WeatherData";
 
-/*Api calls*/
+/*Api call*/
 import citySearch from "./apiCurrentWeather";
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
     fetchFirstData();
   }, []);
 
+  /*useState init*/
   const [cityName, setCityName] = useState("Prague");
   const [showWeather, setShowWeather] = useState({
     degrees: 0,
@@ -19,6 +20,7 @@ function App() {
     unixTimestamp: "Monday, March 6, 2023 9:10:08 PM",
   });
 
+  /*Fetching and displaying data on load*/
   const fetchFirstData = async () => {
     const firstResponse = await citySearch(cityName);
 
@@ -33,6 +35,7 @@ function App() {
     setCityName("");
   };
 
+  /*Getting and displaying data on search with a city parameter*/
   const getData = async (event) => {
     event.preventDefault();
 

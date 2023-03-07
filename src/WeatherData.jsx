@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import DailyWeather from "./DailyWeather";
 import apiDailyWeather from "./apiDailyWeather";
 
@@ -10,7 +10,33 @@ function WeatherData({ showWeather, icon, cityName }) {
     "en-GB"
   );
 
-  apiDailyWeather(cityName);
+  /************/
+
+  const [dailyData, setDailyData] = useState({
+    time: "",
+    degrees: 0,
+  });
+
+  useEffect(() => {
+    firstFetch();
+  }, []);
+
+  const firstFetch = async () => {
+    const firstResponse = await apiDailyWeather(cityName);
+
+    setDailyData({
+      ...dailyData,
+      time: firstResponse,
+      degrees: firstResponse.data.list,
+    });
+  };
+
+  /*Upating data everytime variable icon changes*/
+  useEffect(() => {
+    fetchUpdatedData();
+  }, [icon]);
+
+  const fetchUpdatedData = async () => {};
 
   return (
     <>

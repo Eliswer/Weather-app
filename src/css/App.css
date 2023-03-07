@@ -11,10 +11,6 @@ html {
   color: rgb(42, 42, 42);
 }
 
-h1 {
-  margin-top: 0;
-}
-
 .flex-center,
 .weather-data p {
   display: flex;
@@ -23,23 +19,19 @@ h1 {
   flex-direction: column;
 }
 
-form {
-  height: 9rem;
-}
-
 .weather-container {
-  padding-top: 3rem;
+  padding-top: 8rem;
 }
 
 .weather-data {
   justify-content: space-between;
   display: flex;
-  height: 24rem;
+  height: 30rem;
 }
 
 .weather-data p {
   font-size: 1.5rem;
-  margin: 6px;
+  margin: 5px;
 }
 
 .data-degrees {
@@ -67,6 +59,7 @@ input {
   height: 2rem;
   border-radius: 0 15px 0 15px;
   margin: 20px;
+  margin-bottom: 100px;
   padding: 10px;
   font-size: 1.5rem;
 }

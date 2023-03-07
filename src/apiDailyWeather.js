@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const timeConvert = async (city) => {
+const dailyWeather = async (city) => {
   const latLonResponse = await axios.get(
     "http://api.openweathermap.org/geo/1.0/direct",
     {
@@ -14,20 +14,20 @@ const timeConvert = async (city) => {
   const lat = await latLonResponse.data[0].lat;
   const lon = await latLonResponse.data[0].lon;
 
-  console.log(lat, lon);
-
-  const timezone = await axios.get(
-    "https://www.timeapi.io/api/TimeZone/coordinate",
+  const dailyResponse = await axios.get(
+    "https://api.openweathermap.org/data/2.5/forecast",
     {
       params: {
-        latitude: lat,
-        longitude: lon,
+        lat,
+        lon,
+        units: "metric",
+        appid: "f8317eb24fadb65927f631c2ab7ddd46",
       },
     }
   );
 
-  console.log(timezone);
-  return timezone;
+  console.log(dailyResponse);
+  return dailyResponse;
 };
 
-export default timeConvert;
+export default dailyWeather;

@@ -6,7 +6,7 @@ const apiDailyWeather = async (city) => {
     {
       params: {
         q: city,
-        appid: "f8317eb24fadb65927f631c2ab7ddd46",
+        appid: "734ec92828c5fc4e96c3996621dae42d",
       },
     }
   );
@@ -22,12 +22,11 @@ const apiDailyWeather = async (city) => {
         lon,
         cnt: 7,
         units: "metric",
-        appid: "f8317eb24fadb65927f631c2ab7ddd46",
+        appid: "734ec92828c5fc4e96c3996621dae42d",
       },
     }
   );
 
-  console.log(dailyResponse, "dailyyyyyyyyyyyyyyyy");
   return dailyResponse;
 };
 

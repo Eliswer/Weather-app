@@ -12,12 +12,6 @@ function WeatherData({ showWeather, icon, cityName, change }) {
 
   /************/
 
-  /*useState init*/
-  const [dailyData, setDailyData] = useState({
-    time: "",
-    degrees: 0,
-  });
-
   /*Getting and displaying data on load*/
   useEffect(() => {
     firstFetch();

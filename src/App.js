@@ -52,7 +52,6 @@ function App() {
     });
 
     setChange(change ? false : true);
-    console.log(change);
 
     setCityName("");
   };

@@ -12,6 +12,7 @@ function App() {
 
   /*useState init*/
   const [cityName, setCityName] = useState("Prague");
+  const [change, setChange] = useState(true);
   const [showWeather, setShowWeather] = useState({
     degrees: 0,
     place: ["Prague, CZ"],
@@ -50,6 +51,9 @@ function App() {
       unixTimestamp: response.data.dt,
     });
 
+    setChange(change ? false : true);
+    console.log(change);
+
     setCityName("");
   };
 
@@ -72,6 +76,7 @@ function App() {
         showWeather={showWeather}
         icon={showWeather.icon}
         cityName={cityName}
+        change={change}
       />
     </div>
   );

@@ -1,14 +1,40 @@
 import React from "react";
 import "./css/DailyWeather.css";
 
-function DailyWeather({ degrees, day }) {
+function DailyWeather({ degrees, time }) {
+  /*Time and month from a unix code*/
+  const date = new Date(time * 1000);
+  const hours = date.getHours();
+  const day = date.getDay();
+  let month = date.getMonth();
+
+  /*Display month from an array instead of number*/
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  month = months[month];
+
   return (
     <>
       <div className="daily-container">
-        <p className="bold days">{day}</p>
+        <p className="bold days">
+          {day}/{month} {hours}:00
+        </p>
         <img></img>
         <h1 className="bold">{degrees}°C</h1>
-        <p>max temp</p>
+        <p>temperature</p>
       </div>
     </>
   );

@@ -12,6 +12,12 @@ function WeatherData({ showWeather, icon, cityName, change }) {
 
   /************/
 
+  /*useState init*/
+  const [dailyData, setDailyData] = useState({
+    time: "",
+    degrees: 0,
+  });
+
   /*Getting and displaying data on load*/
   useEffect(() => {
     firstFetch();
@@ -42,10 +48,7 @@ function WeatherData({ showWeather, icon, cityName, change }) {
   }, [change]);
 
   const fetchUpdatedData = async () => {
-    console.log("fetchUpdatedData has been called");
     const response = await apiDailyWeather(cityName);
-    console.log(cityName);
-    console.log("response from apiDailyWeather:", response);
 
     setRenderedDays(
       response.data.list.map((day) => {

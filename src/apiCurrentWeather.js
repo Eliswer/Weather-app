@@ -6,9 +6,7 @@ const citySearch = async (city) => {
     {
       params: {
         q: city,
-      },
-      headers: {
-        Authorization: `${process.env.REACT_APP_KEY_API}`,
+        appid: process.env.REACT_APP_KEY_API,
       },
     }
   );
@@ -23,9 +21,7 @@ const citySearch = async (city) => {
         lat,
         lon,
         units: "metric",
-      },
-      headers: {
-        Authorization: `${process.env.REACT_APP_KEY_API}`,
+        appid: process.env.REACT_APP_KEY_API,
       },
     }
   );

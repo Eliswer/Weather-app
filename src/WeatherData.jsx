@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import DailyWeather from "./DailyWeather";
 import apiDailyWeather from "./apiDailyWeather";
 
-function WeatherData({ showWeather, icon, cityName, change }) {
+function WeatherData({ dataCity, cityName }) {
   const yearlyTime = new Date(
-    showWeather.unixTimestamp * 1000
+    dataCity.dt.unixTimestamp * 1000
   ).toLocaleDateString("en-GB");
-  const time = new Date(showWeather.unixTimestamp * 1000).toLocaleTimeString(
+  const time = new Date(dataCity.dt.unixTimestamp * 1000).toLocaleTimeString(
     "en-GB"
   );
+  console.log(dataCity);
 
   /************/
 
@@ -36,11 +37,6 @@ function WeatherData({ showWeather, icon, cityName, change }) {
     );
   };
 
-  /*Upating data everytime variable changes*/
-  useEffect(() => {
-    fetchUpdatedData();
-  }, [change]);
-
   const fetchUpdatedData = async () => {
     const response = await apiDailyWeather(cityName);
 
@@ -55,7 +51,6 @@ function WeatherData({ showWeather, icon, cityName, change }) {
         );
       })
     );
-    console.log(change);
     console.log(renderedDays);
   };
 
@@ -64,17 +59,17 @@ function WeatherData({ showWeather, icon, cityName, change }) {
       <div className="weather-data flex-center">
         <div className="weather-data-top">
           <p className="data-city">
-            {showWeather.place[0]}, {showWeather.place[1]}
+            s{/*} {showWeather.place[0]}, {showWeather.place[1]} */}
           </p>
           <p className="data-time">
-            {yearlyTime} {time}
+            s{yearlyTime} {time}
           </p>
         </div>
         <div className="flex-center">
-          <p className="data-weather">{showWeather.clouds}</p>
-          <img src={`./img/icons/${icon}@2x.png`} alt="icon"></img>
+          <p className="data-weather">{/*{showWeather.clouds} */}s</p>
+          <img alt="icon">s</img>
         </div>
-        <h1 className="data-degrees">{showWeather.degrees}°C</h1>
+        <h1 className="data-degrees">s{/*{showWeather.degrees}*/}°C</h1>
       </div>
 
       <div className="weather-data-next">{renderedDays}</div>

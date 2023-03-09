@@ -6,7 +6,9 @@ const apiDailyWeather = async (city) => {
     {
       params: {
         q: city,
-        appid: "734ec92828c5fc4e96c3996621dae42d",
+      },
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_KEY_API}`,
       },
     }
   );
@@ -22,11 +24,14 @@ const apiDailyWeather = async (city) => {
         lon,
         cnt: 7,
         units: "metric",
-        appid: "734ec92828c5fc4e96c3996621dae42d",
+      },
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_KEY_API}`,
       },
     }
   );
 
+  console.log(`${process.env.REACT_APP_KEY_API}`, "50400000000000");
   return dailyResponse;
 };
 

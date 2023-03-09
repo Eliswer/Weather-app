@@ -45,7 +45,7 @@ function WeatherData({ showWeather, icon, cityName, change }) {
     const response = await apiDailyWeather(cityName);
 
     setRenderedDays(
-      response.data.list.map((day) => {
+      await response.data.list.map((day) => {
         return (
           <DailyWeather
             degrees={day.main.temp}

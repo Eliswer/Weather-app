@@ -6,13 +6,14 @@ import WeatherData from "./WeatherData";
 import citySearch from "./apiCurrentWeather";
 
 function App() {
+  const [clicked, setClicked] = useState(false);
+
   useEffect(() => {
     fetchFirstData();
   }, []);
 
   /*useState init*/
   const [cityName, setCityName] = useState("Prague");
-  const [change, setChange] = useState(true);
   const [showWeather, setShowWeather] = useState({
     degrees: 0,
     place: ["Prague, CZ"],
@@ -51,7 +52,7 @@ function App() {
       unixTimestamp: response.data.dt,
     });
 
-    setChange(change ? false : true);
+    setClicked(!clicked);
 
     setCityName("");
   };
@@ -75,7 +76,7 @@ function App() {
         showWeather={showWeather}
         icon={showWeather.icon}
         cityName={cityName}
-        change={change}
+        clicked={clicked}
       />
     </div>
   );

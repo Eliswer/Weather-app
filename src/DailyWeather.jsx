@@ -1,7 +1,9 @@
 import React from "react";
 import "./css/DailyWeather.css";
 
-function DailyWeather({ degrees, time }) {
+function DailyWeather({ degrees, time, icon }) {
+  console.log(icon);
+
   /*Time and month from a unix code*/
   const date = new Date(time * 1000);
   const hours = date.getHours();
@@ -32,7 +34,7 @@ function DailyWeather({ degrees, time }) {
         <p className="bold days">
           {day}/{month} {hours}:00
         </p>
-        <img></img>
+        <img src={`./img/icons/${icon}@2x.png`} alt="icon"></img>
         <h1 className="bold">{degrees}°C</h1>
         <p>temperature</p>
       </div>

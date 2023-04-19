@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import DailyWeather from "./DailyWeather";
 import apiDailyWeather from "./apiDailyWeather";
 
-function WeatherData({ showWeather, icon, cityName, change }) {
+function WeatherData({ showWeather, icon, cityName, clicked }) {
   const yearlyTime = new Date(
     showWeather.unixTimestamp * 1000
   ).toLocaleDateString("en-GB");
@@ -21,42 +21,47 @@ function WeatherData({ showWeather, icon, cityName, change }) {
 
   const firstFetch = async () => {
     const firstResponse = await apiDailyWeather(cityName);
-    console.log(firstResponse);
 
     setRenderedDays(
       firstResponse.data.list.map((day) => {
         return (
           <DailyWeather
+            icon={day.weather.icon}
             degrees={day.main.temp}
             time={day.dt}
-            key={firstResponse.data.list[day]}
+            key={day.dt}
           />
         );
       })
     );
   };
 
-  /*Upating data everytime variable changes*/
+  /*Updating data everytime variable changes*/
   useEffect(() => {
-    fetchUpdatedData();
-  }, [change]);
+    const identifier = setTimeout(() => {
+      fetchUpdatedData();
+    }, 500);
+
+    return () => {
+      clearTimeout(identifier);
+    };
+  }, [clicked]);
 
   const fetchUpdatedData = async () => {
     const response = await apiDailyWeather(cityName);
-
+    console.log(response.data);
     setRenderedDays(
       response.data.list.map((day) => {
         return (
           <DailyWeather
+            icon={day.weather.icon}
             degrees={day.main.temp}
             time={day.dt}
-            key={response.data.list[day]}
+            key={day.dt}
           />
         );
       })
     );
-    console.log(change);
-    console.log(renderedDays);
   };
 
   return (

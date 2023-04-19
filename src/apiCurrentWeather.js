@@ -26,7 +26,6 @@ const citySearch = async (city) => {
     }
   );
 
-  console.log(response);
   return response;
 };
 

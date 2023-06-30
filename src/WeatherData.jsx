@@ -69,7 +69,7 @@ function WeatherData({
   // Fetch and display new data when showWeatherData changes
   useEffect(() => {
     const fetchWeatherData = async () => {
-      if (showWeatherData) {
+      if (cityName !== "") {
         const response = await apiDailyWeather(cityName);
         setRenderedDays(
           response.data.list.map((day) => (
@@ -85,7 +85,7 @@ function WeatherData({
     };
 
     fetchWeatherData();
-  }, [showWeatherData]);
+  }, [clicked]);
 
   return (
     <>

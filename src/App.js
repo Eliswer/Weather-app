@@ -51,9 +51,6 @@ function App() {
       clouds: response.data.weather[0].description,
       unixTimestamp: response.data.dt,
     });
-
-    setClicked(!clicked);
-
     setCityName("");
   };
 
@@ -69,7 +66,15 @@ function App() {
           onChange={changeCityName}
           placeholder="City name ..."
         ></input>
-        <button onClick={getData}>Search</button>
+        <button
+          onClick={(e) => {
+            setClicked(!clicked);
+            getData();
+            e.preventDefault();
+          }}
+        >
+          Search
+        </button>
       </form>
 
       <WeatherData

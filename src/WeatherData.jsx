@@ -58,7 +58,7 @@ function WeatherData({ showWeather, icon, cityName, clicked }) {
     if (clicked) {
       fetchUpdatedData();
     }
-  }, [clicked, cityName]);
+  }, [clicked]);
 
   return (
     <>

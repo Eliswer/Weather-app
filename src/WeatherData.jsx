@@ -26,7 +26,7 @@ function WeatherData({ showWeather, icon, cityName, clicked }) {
       firstResponse.data.list.map((day) => {
         return (
           <DailyWeather
-            icon={day.weather.icon}
+            icon={day.weather[0].icon}
             degrees={day.main.temp}
             time={day.dt}
             key={day.dt}
@@ -36,33 +36,29 @@ function WeatherData({ showWeather, icon, cityName, clicked }) {
     );
   };
 
-  /*Updating data everytime variable changes*/
+  /*Updating data every time variable changes*/
   useEffect(() => {
-    const identifier = setTimeout(() => {
-      fetchUpdatedData();
-    }, 500);
-
-    return () => {
-      clearTimeout(identifier);
+    const fetchUpdatedData = async () => {
+      const response = await apiDailyWeather(cityName);
+      console.log(response.data);
+      setRenderedDays(
+        response.data.list.map((day) => {
+          return (
+            <DailyWeather
+              icon={day.weather[0].icon}
+              degrees={day.main.temp}
+              time={day.dt}
+              key={day.dt}
+            />
+          );
+        })
+      );
     };
-  }, [clicked]);
 
-  const fetchUpdatedData = async () => {
-    const response = await apiDailyWeather(cityName);
-    console.log(response.data);
-    setRenderedDays(
-      response.data.list.map((day) => {
-        return (
-          <DailyWeather
-            icon={day.weather.icon}
-            degrees={day.main.temp}
-            time={day.dt}
-            key={day.dt}
-          />
-        );
-      })
-    );
-  };
+    if (clicked) {
+      fetchUpdatedData();
+    }
+  }, [clicked, cityName]);
 
   return (
     <>
@@ -77,7 +73,7 @@ function WeatherData({ showWeather, icon, cityName, clicked }) {
         </div>
         <div className="flex-center">
           <p className="data-weather">{showWeather.clouds}</p>
-          <img src={`./img/icons/${icon}@2x.png`} alt="icon"></img>
+          <img src={`./img/icons/${icon}@2x.png`} alt="icon" />
         </div>
         <h1 className="data-degrees">{showWeather.degrees}°C</h1>
       </div>

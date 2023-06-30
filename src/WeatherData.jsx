@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import DailyWeather from "./DailyWeather";
 import apiDailyWeather from "./apiDailyWeather";
 
-function WeatherData({ showWeather, icon, cityName, clicked }) {
+function WeatherData({
+  showWeather,
+  showWeatherData,
+  icon,
+  cityName,
+  clicked,
+}) {
   const yearlyTime = new Date(
     showWeather.unixTimestamp * 1000
   ).toLocaleDateString("en-GB");
@@ -58,7 +64,28 @@ function WeatherData({ showWeather, icon, cityName, clicked }) {
     if (clicked) {
       fetchUpdatedData();
     }
-  }, [clicked, cityName]);
+  }, [clicked]);
+
+  // Fetch and display new data when showWeatherData changes
+  useEffect(() => {
+    const fetchWeatherData = async () => {
+      if (cityName !== "") {
+        const response = await apiDailyWeather(cityName);
+        setRenderedDays(
+          response.data.list.map((day) => (
+            <DailyWeather
+              icon={day.weather[0].icon}
+              degrees={day.main.temp}
+              time={day.dt}
+              key={day.dt}
+            />
+          ))
+        );
+      }
+    };
+
+    fetchWeatherData();
+  }, [clicked]);
 
   return (
     <>

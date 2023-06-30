@@ -6,7 +6,7 @@ const citySearch = async (city) => {
     {
       params: {
         q: city,
-        appid: "f8317eb24fadb65927f631c2ab7ddd46",
+        appid: "734ec92828c5fc4e96c3996621dae42d",
       },
     }
   );
@@ -21,12 +21,11 @@ const citySearch = async (city) => {
         lat,
         lon,
         units: "metric",
-        appid: "f8317eb24fadb65927f631c2ab7ddd46",
+        appid: "734ec92828c5fc4e96c3996621dae42d",
       },
     }
   );
 
-  console.log(response, 20000000);
   return response;
 };
 

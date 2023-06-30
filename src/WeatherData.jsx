@@ -1,13 +1,64 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import DailyWeather from "./DailyWeather";
+import apiDailyWeather from "./apiDailyWeather";
 
-function WeatherData({ showWeather, icon, dailyResponse }) {
+function WeatherData({ showWeather, icon, cityName, clicked }) {
   const yearlyTime = new Date(
     showWeather.unixTimestamp * 1000
   ).toLocaleDateString("en-GB");
   const time = new Date(showWeather.unixTimestamp * 1000).toLocaleTimeString(
     "en-GB"
   );
+
+  /************/
+
+  /*Getting and displaying data on load*/
+  useEffect(() => {
+    firstFetch();
+  }, []);
+
+  const [renderedDays, setRenderedDays] = useState();
+
+  const firstFetch = async () => {
+    const firstResponse = await apiDailyWeather(cityName);
+
+    setRenderedDays(
+      firstResponse.data.list.map((day) => {
+        return (
+          <DailyWeather
+            icon={day.weather[0].icon}
+            degrees={day.main.temp}
+            time={day.dt}
+            key={day.dt}
+          />
+        );
+      })
+    );
+  };
+
+  /*Updating data every time variable changes*/
+  useEffect(() => {
+    const fetchUpdatedData = async () => {
+      const response = await apiDailyWeather(cityName);
+      console.log(response.data);
+      setRenderedDays(
+        response.data.list.map((day) => {
+          return (
+            <DailyWeather
+              icon={day.weather[0].icon}
+              degrees={day.main.temp}
+              time={day.dt}
+              key={day.dt}
+            />
+          );
+        })
+      );
+    };
+
+    if (clicked) {
+      fetchUpdatedData();
+    }
+  }, [clicked, cityName]);
 
   return (
     <>
@@ -19,21 +70,15 @@ function WeatherData({ showWeather, icon, dailyResponse }) {
           <p className="data-time">
             {yearlyTime} {time}
           </p>
-          <p className="data-weather">{showWeather.clouds}</p>
         </div>
-        <img src={`Weather-app/src/img/icons/${icon}@2x.png`} alt="icon"></img>
+        <div className="flex-center">
+          <p className="data-weather">{showWeather.clouds}</p>
+          <img src={`./img/icons/${icon}@2x.png`} alt="icon" />
+        </div>
         <h1 className="data-degrees">{showWeather.degrees}°C</h1>
       </div>
 
-      <div className="weather-data-next">
-        <DailyWeather degrees={10} day={"Mo"} dailyResponse={dailyResponse} />
-        <DailyWeather degrees={10} day={"Tue"} dailyResponse={dailyResponse} />
-        <DailyWeather degrees={10} day={"Wed"} dailyResponse={dailyResponse} />
-        <DailyWeather degrees={10} day={"Thu"} dailyResponse={dailyResponse} />
-        <DailyWeather degrees={10} day={"Fri"} dailyResponse={dailyResponse} />
-        <DailyWeather degrees={10} day={"Sat"} dailyResponse={dailyResponse} />
-        <DailyWeather degrees={10} day={"Sun"} dailyResponse={dailyResponse} />
-      </div>
+      <div className="weather-data-next">{renderedDays}</div>
     </>
   );
 }

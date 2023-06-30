@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const dailyWeather = async (city) => {
+const apiDailyWeather = async (city) => {
   const latLonResponse = await axios.get(
     "http://api.openweathermap.org/geo/1.0/direct",
     {
       params: {
         q: city,
-        appid: "f8317eb24fadb65927f631c2ab7ddd46",
+        appid: "734ec92828c5fc4e96c3996621dae42d",
       },
     }
   );
@@ -15,19 +15,19 @@ const dailyWeather = async (city) => {
   const lon = await latLonResponse.data[0].lon;
 
   const dailyResponse = await axios.get(
-    "https://api.openweathermap.org/data/2.5/forecast",
+    " http://api.openweathermap.org/data/2.5/forecast",
     {
       params: {
         lat,
         lon,
+        cnt: 7,
         units: "metric",
-        appid: "f8317eb24fadb65927f631c2ab7ddd46",
+        appid: "734ec92828c5fc4e96c3996621dae42d",
       },
     }
   );
 
-  console.log(dailyResponse);
   return dailyResponse;
 };
 
-export default dailyWeather;
+export default apiDailyWeather;

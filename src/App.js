@@ -1,14 +1,18 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./css/App.css";
-import citySearch from "./apiCurrentWeather";
 import WeatherData from "./WeatherData";
-import dailyWeather from "./apiDailyWeather";
+
+/*Api call*/
+import citySearch from "./apiCurrentWeather";
 
 function App() {
+  const [clicked, setClicked] = useState(false);
+
   useEffect(() => {
     fetchFirstData();
   }, []);
 
+  /*useState init*/
   const [cityName, setCityName] = useState("Prague");
   const [showWeather, setShowWeather] = useState({
     degrees: 0,
@@ -18,6 +22,7 @@ function App() {
     unixTimestamp: "Monday, March 6, 2023 9:10:08 PM",
   });
 
+  /*Fetching and displaying data on load*/
   const fetchFirstData = async () => {
     const firstResponse = await citySearch(cityName);
 
@@ -29,9 +34,10 @@ function App() {
       clouds: firstResponse.data.weather[0].description,
       unixTimestamp: firstResponse.data.dt,
     });
-    console.log(showWeather);
+    setCityName("");
   };
 
+  /*Getting and displaying data on search with a city parameter*/
   const getData = async (event) => {
     event.preventDefault();
 
@@ -41,9 +47,12 @@ function App() {
       ...showWeather,
       degrees: response.data.main.temp,
       place: [response.data.name, response.data.sys.country],
+      icon: response.data.weather[0].icon,
       clouds: response.data.weather[0].description,
       unixTimestamp: response.data.dt,
     });
+
+    setClicked(!clicked);
 
     setCityName("");
   };
@@ -66,7 +75,8 @@ function App() {
       <WeatherData
         showWeather={showWeather}
         icon={showWeather.icon}
-        //dailyResponse={dailyResponse}
+        cityName={cityName}
+        clicked={clicked}
       />
     </div>
   );

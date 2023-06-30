@@ -22,6 +22,8 @@ function App() {
     unixTimestamp: "Monday, March 6, 2023 9:10:08 PM",
   });
 
+  const [showWeatherData, setShowWeatherData] = useState(null);
+
   /*Fetching and displaying data on load*/
   const fetchFirstData = async () => {
     const firstResponse = await citySearch(cityName);
@@ -34,6 +36,8 @@ function App() {
       clouds: firstResponse.data.weather[0].description,
       unixTimestamp: firstResponse.data.dt,
     });
+
+    setShowWeatherData(firstResponse.data);
     setCityName("");
   };
 
@@ -51,6 +55,8 @@ function App() {
       clouds: response.data.weather[0].description,
       unixTimestamp: response.data.dt,
     });
+
+    setShowWeatherData(response.data);
     setCityName("");
   };
 
@@ -69,8 +75,7 @@ function App() {
         <button
           onClick={(e) => {
             setClicked(!clicked);
-            getData();
-            e.preventDefault();
+            getData(e);
           }}
         >
           Search
@@ -79,6 +84,7 @@ function App() {
 
       <WeatherData
         showWeather={showWeather}
+        showWeatherData={showWeatherData}
         icon={showWeather.icon}
         cityName={cityName}
         clicked={clicked}

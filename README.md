@@ -6,6 +6,10 @@ Search for your city and display current weather and upcoming weather
   2. NPM package Axios
 
 # How to set up:
+Install packages:
+```bash
+npm install
+```
 Start the server:
 ```bash
 npm start
